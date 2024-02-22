@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement-EFC", "EmployeeManagement-EFC\EmployeeManagement-EFC.csproj", "{B5CBE938-8267-4D55-8FF3-568E1E3DB72B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5CBE938-8267-4D55-8FF3-568E1E3DB72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CBE938-8267-4D55-8FF3-568E1E3DB72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CBE938-8267-4D55-8FF3-568E1E3DB72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CBE938-8267-4D55-8FF3-568E1E3DB72B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C155969-2F33-4C46-8F9C-A5D166F3312F}
+	EndGlobalSection
+EndGlobal
