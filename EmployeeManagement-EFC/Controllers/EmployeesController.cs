@@ -2,6 +2,7 @@
 using EmployeeManagement_EFC.Models;
 using EmployeeManagement_EFC.Models.Domains;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement_EFC.Controllers
 {
@@ -20,7 +21,7 @@ namespace EmployeeManagement_EFC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddEmployeesViewModel addEmployeesViewRequest)
+        public async Task< IActionResult> Add(AddEmployeesViewModel addEmployeesViewRequest)
         {
             var employee = new Employee()
             {
@@ -31,9 +32,65 @@ namespace EmployeeManagement_EFC.Controllers
                 Department = addEmployeesViewRequest.Department,
                 Email = addEmployeesViewRequest.Email
             };
-            empDbContext.Employees.Add(employee);
+           await empDbContext.Employees.AddAsync(employee);
+          await  empDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task< IActionResult> Index()
+        {
+            var employee= await empDbContext.Employees.ToListAsync();
+            return View(employee);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid Id)
+        {
+
+            var employee= await empDbContext.Employees.SingleOrDefaultAsync(x => x.Id == Id);
+            if (employee != null)
+            {
+                var employees = new UpdateEmployeeViewModel()
+                {
+                    Id = employee.Id,
+                    Name = employee.Name,
+                    Salary = employee.Salary,
+                    DateOfBirth = employee.DateOfBirth,
+                    Department = employee.Department,
+                    Email = employee.Email
+                };
+
+                return View(employees);
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult Details(UpdateEmployeeViewModel model)
+        {
+            var employee= empDbContext.Employees.SingleOrDefault(x => x.Id == model.Id);
+            if(employee != null)
+            {
+                employee.Name = model.Name;
+                employee.Salary = model.Salary;
+                employee.Email = model.Email;
+                employee.DateOfBirth = model.DateOfBirth;
+                employee.Department = model.Department;
+              
+
+                empDbContext.SaveChanges();
+               return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+
+        public IActionResult Delete(UpdateEmployeeViewModel model)
+        {
+
+            var employee = empDbContext.Employees.SingleOrDefault(x => x.Id == model.Id);
+            empDbContext.Employees.Remove(employee);
             empDbContext.SaveChanges();
-            return RedirectToAction("Add");
+            return RedirectToAction("Index");
         }
     }
 }
